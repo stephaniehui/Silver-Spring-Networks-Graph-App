@@ -1,11 +1,10 @@
-<% provide(:title, 'Soak Testing') %>
-<head>	
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	
-	<script src="http://code.highcharts.com/highcharts.js"></script>
-	<script src="http://code.highcharts.com/modules/exporting.js"></script>
-	<script type="text/javascript" src="../Highcharts/js/highcharts.src.js"></script>
-	
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 $(function () {
     $(document).ready(function() {
@@ -28,14 +27,14 @@ $(function () {
                         var series = this.series[0];
                         setInterval(function() {
                             var x = (new Date()).getTime(), // current time
-                                y = <%= @sum %>
+                                y = Math.random();
                             series.addPoint([x, y], true, true);
                         }, 1000);
                     }
                 }
             },
             title: {
-                text: 'Failures'
+                text: 'Live random data'
             },
             xAxis: {
                 type: 'datetime',
@@ -75,7 +74,7 @@ $(function () {
                     for (i = -19; i <= 0; i++) {
                         data.push({
                             x: time + i * 1000,
-                            y: <%= @sum %>
+                            y: Math.random()
                         });
                     }
                     return data;
@@ -86,38 +85,12 @@ $(function () {
     
 });
 		</script>
-</head>
-<div class="span9">
-  <div class="hero-unit">
-    <h1>Sprint Meter :5b40</h1>
-    <p>These are the <b>KIO</b> statistics and graphs for the Sprint Meter with IPv6 address fd04:e37c:f2be:5b:213:5001:0154:5b40 </p>
-  </div><!--/hero-unit-->
-  <div class="row-fluid">
-    <div class="span9">
-      <h2>Failures</h2>
-      <p>These are failures presented by the KIO statistics on this meter</p>
-	  
-	  <div id="container" style="width:100%; height: 400px">
-		
-	  </div>
-      <p><a class="btn" href="#">View details &raquo;</a></p>
-    </div><!--/span-->
-    <div class="span9">
-      <h2>Errors</h2>
-      <p>These are errors presented by the KIO statistics on this meter</p>
-      <p><a class="btn" href="#">View details &raquo;</a></p>
-    </div><!--/span-->
-    <div class="span9">
-      <h2>Activity</h2>
-      <p>This the activity presented by the KIO statistics on this meter</p>
-      <p><a class="btn" href="#">View details &raquo;</a></p>
-    </div><!--/span-->
-  </div><!--/row-->
-  
-</div><!--/span-->
+	</head>
+	<body>
+<script src="../../js/highcharts.js"></script>
+<script src="../../js/modules/exporting.js"></script>
 
-<%= @f1 %>
-<%= @f2 %>
-<%= @f3 %>
-<%= @f4 %>
-<%= @sum %>
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+	</body>
+</html>

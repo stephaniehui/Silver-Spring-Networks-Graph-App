@@ -29,6 +29,17 @@ textarea {
   }
 }
 
+.span9{
+  width: 1000px;
+}
+
+.row-fluid{
+  width: 1000px;
+  .span9{
+	width: 1000px;
+  }
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -39,7 +50,7 @@ h1 {
   font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
 }
 
 h2 {
@@ -67,7 +78,6 @@ p {
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
-  font-weight: bold;
   line-height: 1;
   &:hover {
     color: white;
