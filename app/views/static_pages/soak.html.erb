@@ -1,0 +1,314 @@
+<% provide(:title, 'Soak Testing') %>
+<head>	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+	<script type="text/javascript" src="../Highcharts/js/highcharts.src.js"></script>
+	
+	<!-- Javascript for FAILURES graph -->
+		<script type="text/javascript">
+$(function () {
+    $(document).ready(function() {
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
+        });
+    
+        var chart;
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'failures',
+                type: 'spline',
+                marginRight: 10,
+                events: {
+                    load: function() {
+    
+                        // set up the updating of the chart each second
+                        var series = this.series[0];
+                        setInterval(function() {
+                            var x = (new Date()).getTime(), // current time
+                                y = <%= @sumFailures %>
+                            series.addPoint([x, y], true, true);
+                        }, 1000);
+                    }
+                }
+            },
+            title: {
+                text: 'Failures'
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150
+            },
+            yAxis: {
+                title: {
+                    text: 'Total Failures'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>'+
+                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+
+                        Highcharts.numberFormat(this.y, 2);
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                name: 'Random data',
+                data: (function() {
+                    
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+    
+                    for (i = -19; i <= 0; i++) {
+                        data.push({
+                            x: time + i * 1000,
+                            y: <%= @sumFailures %>
+                        });
+                    }
+                    return data;
+                })()
+            }]
+        });
+    });
+    
+});
+		</script>
+		<!--end Javascript for FAILURES graph-->
+		
+		
+		<!--Javascript for ERRORS graph -->
+				<script type="text/javascript">
+		$(function () {
+		    $(document).ready(function() {
+		        Highcharts.setOptions({
+		            global: {
+		                useUTC: false
+		            }
+		        });
+
+		        var chart;
+		        chart = new Highcharts.Chart({
+		            chart: {
+		                renderTo: 'errors',
+		                type: 'spline',
+		                marginRight: 10,
+		                events: {
+		                    load: function() {
+
+		                        // set up the updating of the chart each second
+		                        var series = this.series[0];
+		                        setInterval(function() {
+		                            var x = (new Date()).getTime(), // current time
+		                                y = <%= @sumErrors %>
+		                            series.addPoint([x, y], true, true);
+		                        }, 1000);
+		                    }
+		                }
+		            },
+		            title: {
+		                text: 'Errors'
+		            },
+		            xAxis: {
+		                type: 'datetime',
+		                tickPixelInterval: 150
+		            },
+		            yAxis: {
+		                title: {
+		                    text: 'Total Errors'
+		                },
+		                plotLines: [{
+		                    value: 0,
+		                    width: 1,
+		                    color: '#808080'
+		                }]
+		            },
+		            tooltip: {
+		                formatter: function() {
+		                        return '<b>'+ this.series.name +'</b><br/>'+
+		                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+
+		                        Highcharts.numberFormat(this.y, 2);
+		                }
+		            },
+		            legend: {
+		                enabled: false
+		            },
+		            exporting: {
+		                enabled: false
+		            },
+		            series: [{
+		                name: 'Random data',
+		                data: (function() {
+		                    
+		                    var data = [],
+		                        time = (new Date()).getTime(),
+		                        i;
+
+		                    for (i = -19; i <= 0; i++) {
+		                        data.push({
+		                            x: time + i * 1000,
+		                            y: <%= @sumErrors %>
+		                        });
+		                    }
+		                    return data;
+		                })()
+		            }]
+		        });
+		    });
+
+		});
+				</script>
+			<!--end Javascript for ERRORS graph-->
+			
+			
+			<!--Javascript for ACTIVITY graph -->
+					<script type="text/javascript">
+			$(function () {
+			    $(document).ready(function() {
+			        Highcharts.setOptions({
+			            global: {
+			                useUTC: false
+			            }
+			        });
+
+			        var chart;
+			        chart = new Highcharts.Chart({
+			            chart: {
+			                renderTo: 'activity',
+			                type: 'spline',
+			                marginRight: 10,
+			                events: {
+			                    load: function() {
+
+			                        // set up the updating of the chart each second
+			                        var series = this.series[0];
+			                        setInterval(function() {
+			                            var x = (new Date()).getTime(), // current time
+			                                y = <%= @sumActivity %>
+			                            series.addPoint([x, y], true, true);
+			                        }, 1000);
+			                    }
+			                }
+			            },
+			            title: {
+			                text: 'Activity'
+			            },
+			            xAxis: {
+			                type: 'datetime',
+			                tickPixelInterval: 150
+			            },
+			            yAxis: {
+			                title: {
+			                    text: 'Total Activity'
+			                },
+			                plotLines: [{
+			                    value: 0,
+			                    width: 1,
+			                    color: '#808080'
+			                }]
+			            },
+			            tooltip: {
+			                formatter: function() {
+			                        return '<b>'+ this.series.name +'</b><br/>'+
+			                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+
+			                        Highcharts.numberFormat(this.y, 2);
+			                }
+			            },
+			            legend: {
+			                enabled: false
+			            },
+			            exporting: {
+			                enabled: false
+			            },
+			            series: [{
+			                name: 'Random data',
+			                data: (function() {
+			                    
+			                    var data = [],
+			                        time = (new Date()).getTime(),
+			                        i;
+
+			                    for (i = -19; i <= 0; i++) {
+			                        data.push({
+			                            x: time + i * 1000,
+			                            y: <%= @sumActivity %>
+			                        });
+			                    }
+			                    return data;
+			                })()
+			            }]
+			        });
+			    });
+
+			});
+					</script>
+				<!--end Javascript for ACTIVITY graph-->
+		
+</head>
+<div class="span9">
+  <div class="hero-unit">
+    <h1>Sprint Meter :5b40</h1>
+    <p>These are the <b>KIO</b> statistics and graphs for the Sprint Meter with IPv6 address fd04:e37c:f2be:5b:213:5001:0154:5b40 </p>
+  </div><!--/hero-unit-->
+  <div class="row-fluid">
+    <div class="span9">
+      <h2>Failures</h2>
+      <p>These are failures presented by the KIO statistics on this meter</p>
+	  
+	  <div id="failures" style="width:100%; height: 400px">	</div>
+      	<%= @f1 %><br/>
+		<%= @f2 %><br/>
+		<%= @f3 %><br/>
+		<%= @f4 %><br/>
+		<%= @f5 %><br/>
+		<%= @f6 %><br/>
+		<%= @f7 %><br/>
+		<%= @f8 %><br/>
+		<%= @f9 %><br/>
+		<%= @f10 %><br/>
+		<%= @f11 %><br/>
+		<%= @f12 %><br/>
+		<%= @f13 %><br/>
+		<%= @f14 %><br/>
+    </div><!--/span-->
+    
+	<div class="span9">
+      <h2>Errors</h2>
+      <p>These are errors presented by the KIO statistics on this meter</p>
+      <div id="errors" style="width:100%; height: 400px">	</div>
+		<%= @e1 %><br/>
+		<%= @e2 %><br/>
+		<%= @e3 %><br/>
+		<%= @e4 %><br/>
+		<%= @e5 %><br/>
+	  </div><!--/span-->
+    
+	<div class="span9">
+      <h2>Activity</h2>
+      <p>This the activity presented by the KIO statistics on this meter</p>
+      <div id="activity" style="width:100%; height: 400px">	</div>
+      	<%= @a1 %><br/>
+		<%= @a2 %><br/>
+		<%= @a3 %><br/>
+		<%= @a4 %><br/>
+		<%= @a5 %><br/>
+		<%= @a6 %><br/>
+		<%= @a7 %><br/>
+		<%= @a8 %><br/>
+    </div><!--/span-->
+  </div><!--/row-->
+  
+</div><!--/span-->
