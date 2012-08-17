@@ -123,9 +123,6 @@ class StaticPagesController < ApplicationController
       @sumActivity += $1.to_i
     end
     
-    
-    
-    
   end
   
   def contact

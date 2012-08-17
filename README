@@ -1,0 +1,26 @@
+This is the README file for Soak Testing.
+
+This website uses Heroku to deploy a web application, written in Ruby on Rails.
+
+So far, the Stat Kio Statistics for the Sprint Meter with IPv6 address fd04:e37c:f2be:5b:213:5001:0154:5b40 is up and running. 
+
+This Ruby on Rails app follows the Model-View-Controller abstraction. There is a great tutorial on helping you work with Ruby on Rails and Heroku found here: http://ruby.railstutorial.org/
+
+Here is the general setup that is needed:
+1) First, you must work on this application from your local repository. 
+2) You must have Rails 3.2.6 and Ruby 1.9.2p320 installed (use RVM if not up to date)
+3) The Gemfile will contain all the Ruby Gems that are needed to work on the application. Type "bundle install" (without quotations) to make sure all the gems will install in your machine.
+4) Download Git as the version control system
+
+
+The Model-View-Controller abstraction is a way for Rails Applications to be written. It follows a DRY (Don't Repeat Yourself) rule. There are a couple files that are significant to connecting everything together:
+1) Whenever you add a page to your application, you must update config/routes.rb accordingly
+2) Then you must update your controller, which is now currently in app/controllers/static_pages_controller.rb (for example, the controller code is under the "soak" method. This code will be run in on the corresponding page)
+3) The view for this specific page (what the user sees in the browser) is located at app/views/static_pages/soak.html.erb. This contains all the html and erb that is specific to this page only
+4) In app/views/layouts, there are files for the general setup of each page.
+
+
+To run the app locally, you must first type "rails s" into your terminal to start the Rails server. Then, type http://localhost:3000/ into your browser, which will take you to the home page. http://localhost:3000/soak will take you to the specific page with graphs. 
+
+
+To actually deploy the app onto Heroku, you need a Heroku account and follow the setup that is needed to get an app set up. The Rails tutorial will also show you steps on how to get your Heroku app up and running. 
